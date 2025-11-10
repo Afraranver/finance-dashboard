@@ -9,7 +9,8 @@
     "scheme": "financedashboard",
     "plugins": [
       "expo-router",
-      "expo-asset"
+      "expo-asset",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
@@ -18,6 +19,11 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png"
+    }
   }
 }

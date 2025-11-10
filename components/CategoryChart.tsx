@@ -1,7 +1,11 @@
 import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
-import { VictoryPie, VictoryLabel } from 'victory-native';
+import { View, Text, Dimensions, Platform } from 'react-native';
 import { Category } from '@/types';
+
+// Conditional imports based on platform
+const VictoryPie = Platform.OS === 'web' 
+  ? require('victory').VictoryPie 
+  : require('victory-native').VictoryPie;
 
 interface CategoryChartProps {
   categories: Category[];
@@ -25,12 +29,12 @@ export const CategoryChart: React.FC<CategoryChartProps> = ({ categories }) => {
       <View className="items-center">
         <VictoryPie
           data={chartData}
-          width={width - 80}
+          width={Platform.OS === 'web' ? 350 : width - 80}
           height={220}
           colorScale={chartData.map(d => d.color)}
           innerRadius={60}
-          labels={({ datum }) => `${((datum.y / totalSpent) * 100).toFixed(0)}%`}
-          labelRadius={({ innerRadius }) => (innerRadius as number) + 25}
+          labels={({ datum }: any) => `${((datum.y / totalSpent) * 100).toFixed(0)}%`}
+          labelRadius={({ innerRadius }: any) => (innerRadius as number) + 25}
           style={{
             labels: { fontSize: 12, fontWeight: 'bold', fill: 'white' },
           }}

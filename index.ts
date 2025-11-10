@@ -27,3 +27,9 @@ export interface UserPreferences {
   theme: 'light' | 'dark';
   notifications: boolean;
 }
+
+import { Platform } from "react-native";
+
+if (Platform.OS === "web") {
+  require("./global.css");
+}
